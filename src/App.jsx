@@ -27,6 +27,7 @@ function App() {
     <>
       <Header />
       <input type="text" name="" id="txtFIltro" placeholder='Buscar por nombre o categoria...' />
+      <button type="submit">Ver gráfico</button>
       <Products 
         obtenerDatos={obtenerDatos}
         listProducts={listProducts}
