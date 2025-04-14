@@ -3,10 +3,9 @@ import Products from './components/Products';
 import Header from './components/Header/Header';
 
 function App() {
-  const [count, setCount] = useState(0)
   const [listProducts, setListProducts] = useState([]);
-
-
+  const [busqueda, setBusqueda] = useState("");
+  const [filtredList, setFiltredList] = useState([]);
 
   const obtenerDatos = async () =>{
     var response;
@@ -18,22 +17,41 @@ function App() {
     }
   }
 
+  const filtrarProductos = () => {
+    const filtro = listProducts.filter((producto) => 
+      producto.title.toLowerCase().includes(busqueda.toLowerCase()) ||
+      producto.category.toLowerCase().includes(busqueda.toLowerCase())
+    );
+    setFiltredList(filtro);
+  }
+
     useEffect(()=>{
-    console.log("useEffect");
     obtenerDatos();
   },[]);
+
+  useEffect(()=>{
+    if (busqueda === "") {
+      setFiltredList(listProducts); // Si no hay búsqueda, muestra todos los productos
+    } else {
+      filtrarProductos();
+    }
+  },[busqueda, listProducts]);
 
   return (
     <>
       <Header />
-      <input type="text" name="" id="txtFIltro" placeholder='Buscar por nombre o categoria...' />
-      <button type="submit">Ver gráfico</button>
-      <Products 
-        obtenerDatos={obtenerDatos}
-        listProducts={listProducts}
-      />
+
+          <input
+            type="text"
+            id="txtFIltro"
+            placeholder="Buscar por nombre o categoria..."
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+          />
+          <Products listProducts={filtredList} obtenerDatos={obtenerDatos} />
+
     </>
-  )
+  );
 }
 
 export default App
