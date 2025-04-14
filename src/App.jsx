@@ -17,13 +17,7 @@ function App() {
     }
   }
 
-  const filtrarProductos = () => {
-    const filtro = listProducts.filter((producto) => 
-      producto.title.toLowerCase().includes(busqueda.toLowerCase()) ||
-      producto.category.toLowerCase().includes(busqueda.toLowerCase())
-    );
-    setFiltredList(filtro);
-  }
+ 
 
     useEffect(()=>{
     obtenerDatos();
