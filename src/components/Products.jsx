@@ -1,33 +1,44 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import {Grafica} from './Grafica';
 
-const Products = ({obtenerDatos, listProducts}) => {
-    useEffect(()=>{
-        obtenerDatos();
-    },[]);
+const Products = ({ obtenerDatos, listProducts }) => {
+
+  useEffect(() => {
+    obtenerDatos();
+  }, []);
 
   return (
-    
-    <>
-    <table>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                        <th>Categoria</th>
-                    </tr>
-              {
-                  listProducts.map((product) => (
-                    <tr>
-                        <td>{product.title}</td>
-                        <td>{product.price}</td>
-                        <td>{product.category}</td>
-                    </tr>
-                  ))
-              }
+      <>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Categoria</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            listProducts.map((product, index) => (
+              <tr key={index}>
+                <td>{product.title}</td>
+                <td>{product.price}</td>
+                <td>{product.category}</td>
+              </tr>
+            ))
+          }
+        </tbody>
 
-                </table>
+
+      </table>
+
+    </>)}
 
     </>
   )
 }
 
 export default Products
+
+
+
