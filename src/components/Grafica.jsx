@@ -22,7 +22,9 @@ export const Grafica = ({ listProducts, obtenerDatos }) => {
 
   return (
     <>
-    
+      {mostrarTabla ? (<Products listProducts={listProducts} obtenerDatos={obtenerDatos} />
+
+      ) : (
         <>
           <button onClick={() => setMostraerTabla(true)}>Mostrar Tabla</button>
           <div className="chart-container">
